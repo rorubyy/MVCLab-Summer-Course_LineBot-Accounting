@@ -10,6 +10,7 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import *
 from influxdb import InfluxDBClient
 from pyquery import PyQuery
+from datetime import datetime, timedelta
 
 
 """
@@ -130,7 +131,9 @@ def handle_textmessage(event):
     # Case 2 : #report list all records
     elif re.match(my_event[1], case_):
         user_id = event.source.user_id
-        query_str = """SELECT * FROM accounting_items"""
+        query_str = """
+        SELECT * FROM accounting_items 
+        """
         result = db.queryData(query_str)
         points = result.get_points(tags={'user': str(user_id)})
 
@@ -167,7 +170,7 @@ def handle_textmessage(event):
         )
 
     # Case 4 : #sum [time shift]
-    elif re.match(my_event[3], ceae_):
+    elif re.match(my_event[3], case_):
         time_shift = recieve_message[1]
         d = datetime.utcnow() - timedelta(days=int(time_shift))
         user_id = event.source.user_id
