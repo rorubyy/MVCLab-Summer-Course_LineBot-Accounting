@@ -140,7 +140,7 @@ def handle_textmessage(event):
         reply_text = ''
         for i, point in enumerate(points):
             time = point['time']
-            event = point['event']
+            event_ = point['event']
             money = point['money']
             reply_text += f'[{i}] -> [{time}] : {event_} {money}\n'
 
@@ -165,7 +165,7 @@ def handle_textmessage(event):
         My_LineBotAPI.reply_message(
             event.reply_token,
             TextSendMessage(
-                text=f"Delete {item} from DB Successfully!"
+                text=f"Delete No.{item} from DB Successfully!"
             )
         )
 
@@ -186,7 +186,7 @@ def handle_textmessage(event):
         My_LineBotAPI.reply_message(
             event.reply_token,
             TextSendMessage(
-                text=f"Total balance in {time_shift} is {sum}."
+                text=f"Total balance in Day{time_shift} is {sum}."
             )
         )
 
