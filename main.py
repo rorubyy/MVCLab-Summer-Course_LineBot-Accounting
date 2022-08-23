@@ -44,13 +44,11 @@ class DB():
 
 
 db = DB('127.0.0.1', 8086, 'root', '', 'accounting_db')
-# load_dotenv()  # Load your local environment variables
+load_dotenv()  # Load your local environment variables
 
-# CHANNEL_TOKEN = os.environ.get('LINE_TOKEN')
-# CHANNEL_SECRET = os.getenv('LINE_SECRET')
+CHANNEL_TOKEN = os.environ.get('LINE_TOKEN')
+CHANNEL_SECRET = os.getenv('LINE_SECRET')
 
-CHANNEL_TOKEN = 'r0aiE8HapBxBhxZbTXKWl9rn45ZA4cOb3rrPytENhIkwlvQHv+TTzjwZOEnnZplUE2q0ivdq6gyiXmNZQjlId3gopVDAFleDw8kvqlIyCHGA+cdz99wbplQARWmvGyynnB7dpt2u4KmLb2d/0JkD6gdB04t89/1O/w1cDnyilFU='
-CHANNEL_SECRET = '11e237d228b4a906c76158f8db6315bf'
 
 app = FastAPI()
 
@@ -186,7 +184,7 @@ def handle_textmessage(event):
         My_LineBotAPI.reply_message(
             event.reply_token,
             TextSendMessage(
-                text=f"Total balance in Day{time_shift} is {sum}."
+                text=f"Total balance in recent {time_shift} days is {sum}."
             )
         )
 
